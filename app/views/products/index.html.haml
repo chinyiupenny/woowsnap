@@ -1,0 +1,37 @@
+%h1 Products
+
+-# %form{ :accept-charset => "UTF-8", :action => "/search" , :method => "get" } 
+-#  %input{  :id => "search_field", :placeholder => "keywords" }
+-#  %input{ :id => "location_field", :value => "Hong Kong" }
+-#  %input{ :name =>"commit", :type => "submit", :value => "Search", :class =>"btn btn-primary" }
+
+= render :partial => "search"
+
+%table.table.table-striped
+  %thead
+    %tr
+      -# %th ID
+      %th Preview
+      %th
+        = t("activerecord.attributes.product.title", :default => t("activerecord.labels.title", :default => "Title"))
+      %th Price
+      %th Shop
+      %th Created at
+  %tbody
+    - @products.each do |product|
+      %tr
+        -# %td= product.id
+        -if product.photos.at(0).nil?
+          %td= image_tag("product_preview.png",:size => "100x100")
+        -else
+          %td= image_tag product.photos.at(0).file.url(:thumb)     
+        %td= link_to product.title, product_path(product)
+        %td= product.price
+        %td= product.shop
+        %td= product.created_at
+        %td
+          = link_to "Show", product_path(product), :class => 'btn btn-mini'
+          = link_to "Edit", edit_product_path(product), :class => 'btn btn-mini'
+          = link_to "Destroy", product_path(product), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn btn-mini btn-danger' 
+
+= link_to "New", new_product_path, :class => 'btn btn-primary'

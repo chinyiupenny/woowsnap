@@ -1,0 +1,5 @@
+<%= form_tag :controller => 'products', :action => 'search', :class => '', :method => 'get' do %>
+	<%= text_field_tag  :search, params[:search], :id => 'search_field', :placeholder =>'Keywords (e.g. iPhone)', :style => 'text-align: left; margin-top: 8px'%>
+	<%= text_field_tag :location, params[:location], :id => 'location_field', :placeholder =>'Location (e.g. Central, Hong Kong)', :style => 'text-align: left; margin-top: 8px' %>
+	<%= submit_tag "Search", :name => nil, :class =>'btn btn-primary' %> 
+<% end %>
