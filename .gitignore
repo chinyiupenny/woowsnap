@@ -16,3 +16,4 @@
 
 #Ignore public system
 /public/system
+.env
