@@ -80,6 +80,7 @@ class PhotosController < ApplicationController
   # DELETE /photos/1.json
   def destroy
     @photo = @product.photos.find(params[:id])
+    AWS::S3::S3Object.delete photo.filename, 'woowsnap_bucket'
     @photo.destroy
 
     respond_to do |format|
